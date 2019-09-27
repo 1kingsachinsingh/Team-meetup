@@ -1,0 +1,283 @@
+<ng-template #modalContent let-close="close">
+    <div class="modal-header">
+      <h5 class="modal-title">Meeting Details</h5>
+      <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-12">
+
+            <div class="card" id="subjectCard">
+                <div class="card-body">
+                  <h5 class="card-title">Subject</h5>
+                  <p class="card-text" *ngIf="subject">{{subject}} </p>                                
+                  <p *ngIf="!subject" class="alert alert-danger">** Subject is required</p>
+    
+                </div>
+            </div>
+
+            <div class="card" id="whoCard">
+                <div class="card-body">
+                  <h5 class="card-title">Participant</h5>
+                  <p class="card-text" *ngIf="selectedUser">{{selectedUser.firstName}} {{selectedUser.lastName}}</p>                                
+                  <p *ngIf="!selectedUser" class="alert alert-danger">** User is required</p>
+
+                </div>
+            </div>
+
+            <div class="card" id="whenCard">
+                <div class="card-body">
+                  <h5 class="card-title">Date & Time</h5>
+                  <p class="card-text" *ngIf="startDate1 && endDate1">{{startDate1 | date: 'medium'}} - {{endDate1 | date: 'medium' }}</p>                                
+
+                  <p *ngIf="!startDate1" class="alert alert-danger">** Start Date/Time is required</p>
+                  <p *ngIf="!endDate1" class="alert alert-danger">** End Date/Time is required</p>
+
+                </div>
+            </div>
+
+
+            <div class="card" id="whereCard">
+                <div class="card-body">
+                  <h5 class="card-title">Location</h5>
+                  <p class="card-text" *ngIf="venue">{{venue}}</p>                                
+                  <p *ngIf="!venue" class="alert alert-danger">** Venue is required</p>
+
+                </div>
+            </div>
+
+          </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+        <button id="btn-finalize" type="button" class="btn btn-success rounded" (click)="createMeetingFunction();close()">
+            Finalize Meeting</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="close()">Back</button>
+    
+    </div>
+
+  </ng-template>
+  
+
+<br>
+<div class="container">
+
+  <div class="row text-center border-bottom border-info">
+
+    <div class="col-sm-12 col-md-9 col-lg-10 own-navbar">
+      <h5 class="" style="float: left;">Lets Meet - Schedule a meeting</h5>
+    </div>
+
+    <div class="col-sm-12 col-md-3 col-lg-2 own-navbar">
+      <div class="btn-group" role="group" style="float: right;">
+        <button id="btnGroupDropUserInfo" type="button" class="btn btn-outline-info rounded" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{adminName ? adminName : 'Admin'}}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDropUserInfo">
+          <a class="dropdown-item" (click)="goToAdminDashboard()">View my meetings</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <br>
+      <!-- Nav tabs -->
+
+      <ul class="nav nav-tabs flex-row" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" data-target="#subject">
+            <i class="fas fa-info-circle icons"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" data-target="#who">
+            <i class="fas fa-user-circle icons"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" data-target="#when">
+            <i class="fas fa-clock icons"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" data-target="#where">
+            <i class="fas fa-location-arrow icons"></i></a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+
+        <div id="subject" class="container tab-pane active">
+          <div class="row ">
+            <div class="col-12">
+              <div class="form-group">
+                <br>
+                <h3>What's your meeting subject?</h3>
+                <br>
+
+                <input type="text" #topic="ngModel" id="inputSubject" name="subject" [(ngModel)]="subject" class="form-control"
+                  placeholder="Our First Meeting" required autofocus>
+
+                <div [hidden]="topic.pristine || topic.valid" class="alert alert-danger">
+                  <div *ngIf="topic.errors?.required">
+                    ** Subject Name is required!
+                  </div>
+                </div>
+
+                <br>
+
+                <textarea type="text" #agenda="ngModel" id="inputDescription" name="description" [(ngModel)]="description"
+                  class="form-control" placeholder="Description of Meeting" required></textarea>
+
+                <div [hidden]="agenda.pristine || agenda.valid" class="alert alert-danger">
+                  <div *ngIf="agenda.errors?.required">
+                    ** Description is required!
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div id="who" class="container tab-pane fade">
+          <br>
+          <div class="row">
+            <div class="col-12">
+              <h3>Who would you like to invite?</h3>
+              <br>
+              <h6 class="">Select a normal user to schedule a Meeting</h6>
+
+            </div>
+
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <input type="text" id="inputUserName" name="userName" [(ngModel)]="userName" class="form-control"
+                  placeholder="Search For User Name">
+                <br>
+                <div class="people-list">
+                  <div class="card my-card" id="card-design" *ngFor="let user of allUsersData | filter:userName">
+
+                    <div class="card-body p-2" (click)="getSelected(user)" *ngIf="user.userId != receiverId">
+                      <span class="d-block font-adjust-heading">{{user.firstName}} {{user.lastName}}</span>
+                      <span class="d-block font-adjust-heading">{{user.email}}</span>
+                      <span class="d-block font-adjust-heading" *ngIf="user.isAdmin=='true'">Admin <i class="fas fa-user-plus"></i></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <h6>Selected User</h6>
+              <div class="card" *ngIf="selectedUser">
+                <div class="card-body">
+                  <h5 class="card-title">{{selectedUser.firstName}} {{selectedUser.lastName}}</h5>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div id="when" class="container tab-pane fade">
+          <br>
+          <div class="row">
+            <div class="col-12">
+              <h3>When do you want to meet?</h3>
+              <br>
+              <div class="form-group">
+
+                <span class="form-heading">Start Time </span>
+
+                <label for="startTime" class="sr-only">Start Time:</label>
+                <input [owlDateTime]="dt1" name="startDate1" [(ngModel)]="startDate1" placeholder="Start Date Time">
+                <span [owlDateTimeTrigger]="dt1">
+                  <i class="fa fa-calendar"></i>
+                </span>
+                <owl-date-time #dt1></owl-date-time>
+                <br>
+                <br>
+
+                <span class="form-heading">End Time </span>
+
+                <label for="endTime" class="sr-only">End Time:</label>
+                <input [owlDateTime]="dt2" name="endDate1" [(ngModel)]="endDate1" placeholder="End Date Time">
+
+                <span [owlDateTimeTrigger]="dt2">
+                  <i class="fa fa-calendar"></i>
+                </span>
+                <owl-date-time #dt2></owl-date-time>
+
+                <br>
+                <br>
+
+                <div *ngIf="validateDate(startDate1,endDate1)" class="alert alert-danger">
+                  * End Date/Time cannot be before Start Date/Time.
+                </div>
+
+                <div *ngIf="validateCurrentDate(startDate1) || validateCurrentDate(endDate1)" class="alert alert-danger">
+                  * How one can Schedule a meeting in back date?
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div id="where" class="container tab-pane fade">
+          <br>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <h3>Where do you want to meet?</h3>
+                <br>
+
+                <h6>Type an address, place or business</h6>
+
+                <input type="text" #location="ngModel" pattern="^[A-Z][A-za-z ]+$" id="inputVenue" name="venue"
+                  [(ngModel)]="venue" class="form-control" placeholder="Venue" required>
+
+                <div [hidden]="location.pristine || location.valid" class="alert alert-danger">
+                  <div *ngIf="location.errors?.pattern">
+                    ** Location should only start with Capital and contain only letters !
+                  </div>
+                  <div *ngIf="location.errors?.required">
+                    ** Location is required!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="btn btn-info rounded" style="float: right;" (click)="viewScheduledMeetingFunction()">
+                View Scheduled Meeting
+              </button>            
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <br>  
+  <div class="row">
+    <div class="col-12">
+        <button id="btn-finalize" type="button" class="btn btn-danger rounded" (click)="goToAdminDashboard()" style="float:right">
+            Back to Dashboard</button>
+    </div>
+  </div>
+</div>

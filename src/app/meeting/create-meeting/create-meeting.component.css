@@ -1,0 +1,97 @@
+.icons{
+    color:lightblue;
+}
+
+#card-design{
+    cursor:pointer;
+}
+#card-design:hover{
+    background-color: lightblue;
+    box-shadow: 0 4px 8px 0 #4ABDAC, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+    
+.people-list {
+    height: 55vh;
+    overflow-y: scroll;
+}
+
+
+.online{
+
+    height: 10px;
+    width: 10px;
+    background-color:green;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .offline{
+  
+    height: 10px;
+    width: 10px;
+    background-color:red;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .own-navbar{
+    padding-bottom: 1vh;
+  }
+
+.item-padding{
+    padding-bottom: 3vh;
+  }
+
+  @media only screen and (max-width:575px) {
+    .icons {
+      font-size: 1.8em;
+    }
+    .nav-item{
+        margin-left: .2vw;
+        margin-right: .2vw;
+    }
+    h3{
+        font-size: 1.5em;
+    }
+}
+  @media only screen and (min-width:576px) and (max-width:768px) {
+    .icons {
+        font-size: 2.5em;
+      }
+      .nav-item{
+        margin-left: 1vw;
+        margin-right: 1vw;
+    }
+ 
+    }
+  @media only screen and (min-width:769px) and (max-width:992px) {
+    .icons {
+        font-size: 3em;
+      }
+      .nav-item{
+        margin-left: 2vw;
+        margin-right: 2vw;
+    }
+ 
+    } 
+  @media only screen and (min-width:993px) and (max-width:1200px) {
+    .icons {
+        font-size: 3.5em;
+      }
+      .nav-item{
+        margin-left: 4vw;
+        margin-right: 4vw;
+    }
+ 
+}
+
+  @media only screen and (min-width:1201px)  {
+    .icons {
+        font-size: 4em;
+      }
+      .nav-item{
+        margin-left: 6vw;
+        margin-right: 6vw;
+    }
+ 
+}

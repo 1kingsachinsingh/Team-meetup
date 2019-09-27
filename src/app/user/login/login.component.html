@@ -1,0 +1,65 @@
+<my-nav></my-nav>
+
+
+<div class="container">
+    <div id="loginbox" style="margin-top: 3vh;" class="col-sm-12 col-md-8 col-lg-6 mx-auto">
+        <div class="card border-info cardBorder">
+
+            <div style="padding-top:30px" class="card-body text-center ">
+                <div class="text-center">
+                    <div>
+                        <h2>Welcome back!</h2>
+                    </div>
+                    <div>
+                        <h5>Ready to schedule another meeting?</h5>
+                    </div>
+                </div>
+
+                <br>
+                <form id="loginform" class="form-horizontal" role="form">
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-at"></i>
+                            </span>
+                        </div>
+                        <input type="email" id="inputEmail" [(ngModel)]="email" class="form-control" placeholder="Email address" name="email" required
+                            autofocus>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon2">
+                                <i class="fas fa-key"></i>
+                            </span>
+                        </div>
+                        <input type="password" id="inputPassword" [(ngModel)]="password" (keydown)="loginUsingKeypress($event)" name="password" class="form-control"
+                            placeholder="Password" required>
+                    </div>
+
+ 
+
+                    <div style="margin-top:10px" class="form-group">
+                        <!-- Button -->
+
+                        <div class="col-sm-12 controls">
+                            <button id="btn-signin" type="button" class="btn btn-primary" (click)="signInFunction()">
+                                <i class="icon-hand-right"></i> Login Now</button>
+                
+                        </div>
+                    </div>
+ 
+                    <a style="float:right" class="nav-link" [routerLink]="['/user/forgot-password']">Forgot password?</a>
+
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <div class="col-md-12 control">
+                    <b>LetsMeet makes meeting scheduling easy...</b>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+{
+  "name": "chat-application",
+  "version": "1.0.0",
+  "description": "Backend for Chat application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shahrukh Sayyed<sayyedshahrukh313@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.5",
+    "express-session": "^1.15.6",
+    "express-socket.io-session": "^1.3.2",
+    "jsonwebtoken": "^8.1.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
+    "mongoose": "^4.11.13",
+    "morgan": "^1.9.0",
+    "nodemailer": "^4.6.7",
+    "pino": "^4.7.2",
+    "redis": "^2.8.0",
+    "request": "^2.83.0",
+    "shortid": "^2.2.8",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {}
+}

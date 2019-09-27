@@ -1,0 +1,189 @@
+<my-nav></my-nav> 
+
+
+<div class="container">
+  <div id="signupbox" style="margin-top:3vh;" class="mainbox col-sm-12 col-md-8 col-lg-6 mx-auto">
+    <div class="card border-info cardBorder">
+      <div class="card-body">
+
+        <div class="text-center">
+          <div>
+            <h3>Welcome to Lets Meet </h3>
+          </div>
+          <div>
+            <h5>We help you schedule meetings faster with less hassle. </h5>
+          </div>
+        </div>
+        <br>
+        <form id="signupform" class="form-horizontal" role="form">
+
+          <div id="signupalert" style="display:none" class="alert alert-danger">
+            <p>Error:</p>
+            <span></span>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="firstname" class="col-md-12 control-label">First Name</label>
+                <div class="col-md-12">
+                  <input type="text" #fstName="ngModel" pattern="^[A-Z][A-za-z ]+$" minlength="2" id="inputFirstName" name="firstName" [(ngModel)]="firstName"
+                    class="form-control" placeholder="First Name" required autofocus>
+                
+
+                  <div [hidden]="fstName.pristine || fstName.valid" class="alert alert-danger">
+                    <div *ngIf="fstName.errors?.pattern">
+                      ** First name should only start with Capital and contain only letters !
+                      <div *ngIf="fstName.errors?.minlength">
+                        ** First Name should contain minimum 2 letters!
+                      </div>
+                    </div>
+                    <div *ngIf="fstName.errors?.required">
+                      ** First Name is required!
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="lastname" class="col-md-12 control-label">Last Name</label>
+                <div class="col-md-12">
+                  <input type="text" #lstName="ngModel" pattern="^[A-Z][A-za-z ]+$" minlength="2" id="inputLastName" name="lastName" [(ngModel)]="lastName"
+                    class="form-control" placeholder="Last Name" required>
+                  <div [hidden]="lstName.pristine || lstName.valid" class="alert alert-danger">
+                    <div *ngIf="lstName.errors?.pattern">
+                      ** Last name should only start with Capital and contain only letters !
+                      <div *ngIf="lstName.errors?.minlength">
+                        ** Last Name should contain minimum 2 letters!
+                      </div>
+                    </div>
+                    <div *ngIf="lstName.errors?.required">
+                      ** Last Name is required!
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="email" class="col-md-3 control-label">Email</label>
+            <div class="col-md-12">
+              <input type="email" #emailId="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" id="inputEmail" name="email"
+                [(ngModel)]="email" class="form-control" placeholder="Email address" required>
+
+              <div [hidden]="emailId.valid || emailId.pristine" class="alert alert-danger">
+                <div *ngIf="emailId.errors?.pattern">
+                  ** Email is invalid!
+
+                </div>
+                <div *ngIf="emailId.errors?.required">
+                  ** Email is required!
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="userName" class="col-md-3 control-label">User Name</label>
+            <div class="col-md-12">
+              <input type="text" #user="ngModel" pattern="^[A-Z][A-za-z0-9- ]+$" minlength="2" id="inputUserName" name="userName" [(ngModel)]="userName"
+                class="form-control" placeholder="User Name" required>
+              <div [hidden]="user.pristine || user.valid" class="alert alert-danger">
+                <div *ngIf="user.errors?.pattern">
+                  ** User name should only start with Capital letter and contain only letters & digits !
+                  <div *ngIf="user.errors?.minlength">
+                    ** User Name should contain minimum 2 letters!
+                  </div>
+                </div>
+                <div *ngIf="user.errors?.required">
+                  ** User Name is required!
+                </div>
+              </div>
+              <div *ngIf="isAdmin == 'true' && userName">
+                <div *ngIf="validateUserName(userName)" class="alert alert-danger">
+                  ** Admin user should have '-admin' at the end of User Name
+                </div>
+              </div>
+    
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="col-md-3 control-label">Password</label>
+            <div class="col-md-12">
+              <input type="password" #pass="ngModel" id="inputPassword" name="password" [(ngModel)]="password" class="form-control" placeholder="Password"
+                minlength="8" required>
+              <div [hidden]="pass.valid || pass.pristine" class="alert alert-danger">
+                <div *ngIf="pass.errors?.minlength">
+                  ** Password should contain atleast 8 characters!
+                </div>
+                <div *ngIf="pass.errors?.required">
+                  ** Password is required!
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="countryList" class="col-md-12 control-label">Country</label>
+                <div class="col-md-12">
+                  <select [(ngModel)]="country" #Country="ngModel" name="country" class="form-control" id="inputCountry" (click)="onChangeOfCountry()"
+                    required>
+                    <option value="">Select</option>
+                    <option *ngFor="let country of countries" [value]="country.code">{{country.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="mobile" class="col-md-12 control-label">Mobile</label>
+                <div class="col-md-12">
+
+                  <div class="input-group">
+                    <div class="input-group-text">+{{countryCode}}</div>
+                    <input type="number" #mobileNum="ngModel" pattern="^\d{10}$" id="inputMobile" class="form-control" name="mobile" [(ngModel)]="mobileNumber"
+                      placeholder="Mobile" required>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="checkbox">
+              <label> 
+                <input id="inputAdmin" [(ngModel)]="isAdmin" (change)="checkValue(isAdmin?'true':'false')" type="checkbox" name="isAdmin" > Give me Admin's Superpower
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <div class="col-md-12">
+              <button id="btn-signup" type="button" class="btn btn-primary" (click)="signupFunction()">
+                <i class="icon-hand-right"></i> Sign Up to start scheduling</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <br>
+  </div>
+</div>

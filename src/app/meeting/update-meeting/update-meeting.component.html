@@ -1,0 +1,150 @@
+<br>
+<div class="container">
+
+
+  <div class="row text-center border-bottom border-info">
+
+    <div class="col-sm-12 col-md-9 col-lg-10 own-navbar">
+      <h5 class="" style="float: left;">Lets Meet - reschedule a meeting</h5>
+    </div>
+
+    <div class="col-sm-12 col-md-3 col-lg-2 own-navbar">
+      <div class="btn-group" role="group" style="float: right;">
+        <button id="btnGroupDropUserInfo" type="button" class="btn btn-outline-info rounded" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{adminName ? adminName : 'Admin'}}
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDropUserInfo">
+          <a class="dropdown-item" (click)="goToAdminDashboard()">View my meetings</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <br>
+  <div class="row">
+
+    <div class="col-12">
+
+      <div class="card " id="card-subject">
+        <div class="card-header">
+          <h4> Subject </h4>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <input type="text" #topic="ngModel" id="inputSubject" name="subject" [(ngModel)]="subject" class="form-control"
+              placeholder="Our First Meeting" required autofocus>
+            <div [hidden]="topic.pristine || topic.valid" class="alert alert-danger">
+              <div *ngIf="topic.errors?.required">
+                ** Subject Name is required!
+              </div>
+            </div>
+            <br>
+
+            <textarea type="text" #agenda="ngModel" id="inputDescription" name="description" [(ngModel)]="description"
+              class="form-control" placeholder="Description of Meeting" required></textarea>
+            <div [hidden]="agenda.pristine || agenda.valid" class="alert alert-danger">
+              <div *ngIf="agenda.errors?.required">
+                ** Description is required!
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div> <!-- End card-subject-->
+      <br>
+
+
+      <div class="card" id="card-Participant">
+        <div class="card-header">
+          <h4> Participant </h4>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{selectedUser}} </h5>
+        </div>
+      </div> <!-- End card-Participant-->
+      <br>
+
+      <div class="card" id="card-when">
+        <div class="card-header">
+          <h4>Date and Time</h4>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+
+            <span class="form-heading">Start Time </span>
+
+            <label for="startTime" class="sr-only">Start Time:</label>
+            <input [owlDateTime]="dt1" name="startDate1" [(ngModel)]="startDate1" placeholder="Start Date Time">
+            <span [owlDateTimeTrigger]="dt1">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <owl-date-time #dt1></owl-date-time>
+            <br>
+            <br />
+
+            <span class="form-heading">End Time </span>
+
+            <label for="endTime" class="sr-only">End Time:</label>
+            <input [owlDateTime]="dt2" name="endDate1" [(ngModel)]="endDate1" placeholder="End Date Time">
+            <span [owlDateTimeTrigger]="dt2">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <owl-date-time #dt2></owl-date-time>
+
+
+            <br>
+            <br>
+
+            <div *ngIf="validateDate(startDate1,endDate1)" class="alert alert-danger">
+              * End Date/Time cannot be before Start Date/Time.
+            </div>
+
+            <div *ngIf="validateCurrentDate(startDate1) || validateCurrentDate(endDate1)" class="alert alert-danger">
+              * How one can Schedule a meeting in back date?
+            </div>
+
+
+          </div>
+        </div>
+      </div> <!-- End card-when-->
+      <br>
+
+      <div class="card" id="card-where">
+        <div class="card-header">
+          <h4>Location </h4>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <div class="col-md-12">
+              <label for="location" class="col-md-12 control-label">Type an address, place or business</label>
+
+              <input type="text" #location="ngModel" pattern="^[A-Z][A-za-z ]+$" id="inputVenue" name="venue"
+                [(ngModel)]="venue" class="form-control" placeholder="Venue" required>
+              <div [hidden]="location.pristine || location.valid" class="alert alert-danger">
+                <div *ngIf="location.errors?.pattern">
+                  ** Location should only start with Capital and contain only letters !
+                </div>
+                <div *ngIf="location.errors?.required">
+                  ** Location is required!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- End card-where-->
+
+    </div> <!-- End col-12-->
+  </div><!-- row end-->
+
+  <br>
+  <div class="row">
+    <div class="col-12">
+      <button id="btn-finalize" type="button" class="btn btn-success rounded" (click)="updateMeetingFunction()" style="float:right">
+        Reschedule Meeting</button>
+      <button id="btn-finalize" type="button" class="btn btn-danger rounded" (click)="goToAdminDashboard()" style="float:right">
+        Back to Dashboard</button>
+    </div>
+  </div>
+
+</div>
