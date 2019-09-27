@@ -1,8 +1,8 @@
-# Lets Meet - Meeting Planner 
+# Lets Meet - MeetingRoomPlanner 
 
 Angular is a platform that makes it easy to build applications with the web. Angular combines declarative templates, dependency injection, end to end tooling, and integrated best practices to solve development challenges. Angular empowers developers to build applications that live on the web, mobile, or the desktop
 
-Lets Meet is an MEAN stack based application which is used to schedule the Meetings.
+Lets Meet is an MEAN stack based application which is used to schedule the MeetingsRooms in a Building.
 There are two separate parts of the application. 
 
 
@@ -102,29 +102,29 @@ code for mobile number (like 91 for India) will be automatically selected after 
     a) User are of two roles, normal and admin. Admin will be identified
     with a username ending with "admin", and by selecting the Option(Give Me admin's Power) while doing signup.
 
-3) User Slots management system (Flow for normal User) -
+3) MeetingRoom Slots management system (Flow for normal User) -
 
-    a) Upon login, normal User will be taken to a dashboard showing his
-    current months', planned meetings, in the form of a calendar. 
+    a) Upon login, normal User will be taken to a dashboard showing 
+    current available room in a months', booked meetingsrooms , in the form of a calendar. 
 
-    b) User is able to view only his meeting slots and he should not be
+    b) User is able to view only his booked meetingroom slots and he should not be
     able to make any changes as admin is the only person who can edit the meeting.
 
-4) User Slots management system (Flow for Admin)-
+4) MeetingRoom Slots management system (Flow for Admin)-
 
-    a) Upon login, Admin will be taken to a dashboard, where he/she will be able to see all normal users.
+    a) Upon login, Admin will be taken to a dashboard, where he/she will be able to see all rooms. and can create room and can take care of adding facilities. 
 
-    b) Upon clicking on any user, admin will be taken to user's current calendar, with current date selected, by default.
+    b) Upon clicking on any room, admin will be taken to room current calendar, with current date & Time selected, by default.
 
-    c) Admin is able to add/delete/update meetings on any day, by clicking on a appropriate day-cell/timeline.
+    c) Admin is able to add/delete/update MeetingRooms on any day, by clicking on a appropriate day-cell/timeline.
 
 5) User Alerts management system
 
     a) Normal User will get notifications in real time, though an alert if he is
     online, and email (irrespective of whether he is online or offline), when
-        i) A meeting is created by admin
-       ii) A meeting is changed by admin
-      iii) 1 minute before meeting, with an option to snooze or dismiss.
+        i) A meetingroom is created by admin
+       ii) A meetingroom is changed by admin
+      iii) 10 minute before meeting, with an option to snooze or dismiss.
 
 6) Planner Views
 
@@ -169,7 +169,7 @@ code for mobile number (like 91 for India) will be automatically selected after 
 ## Authors
 
 * **Sachin Singh** - *Initial work* - [Sachin Singh](https://github.com/1kingsachinsingh)
-* **Edwisor** - *Problem Statement* - [Edwisor](https://www.edwisor.com)
+* **DayOne** - *Problem Statement* - [DayOne](https://www.https://www.day1tech.com/)
 
 ## License
 
@@ -177,5 +177,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Thanks for Edwisor to review this application.
+* Thanks for Day1Tech to review this application.
 * I would like to thank my friends,colleagues for supporting me to develop this Application.
