@@ -23,7 +23,7 @@
     "morgan": "^1.9.0",
     "nodemailer": "^4.6.7",
     "pino": "^4.7.2",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "request": "^2.83.0",
     "shortid": "^2.2.8",
     "socket.io": "^2.0.4"
